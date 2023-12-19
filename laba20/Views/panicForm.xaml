@@ -1,0 +1,106 @@
+﻿<Window x:Class="laba20.Views.panicForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:laba20.Views"
+        mc:Ignorable="d"
+        Title="panicForm" Height="450" Width="800">
+
+    <Grid Background="#9496EC">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Style="{StaticResource GroupBoxStyle}" Grid.Column="0" FontFamily="Montserrat" FontSize="14" Header="Дисциплины">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <ListView Grid.Row="0" ItemsSource="{Binding ShowDiscipline}" SelectedItem="{Binding SelectedDiscipline}" Background="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="2" BorderBrush="White" CornerRadius="2" Width="300">
+                                <Grid Margin="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding NameDiscipline}" Foreground="White"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource StatusTextBlockStyle}"/>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="3" Content="Изменить статус"  Grid.Column="0" Command="{Binding ChangeStatusDiciplineCommand}"/>
+                    <Button Style="{StaticResource ButtonStyle}" Margin="3" Content="Удалить" Grid.Column="1" Command="{Binding DeleteDisciplineCommand}"/>
+                </Grid>
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Style="{StaticResource GroupBoxStyle}" FontFamily="Montserrat" FontSize="14" Header="Фильтр">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <RadioButton x:Name="radiobtn1" Content="Все дисциплины" Margin="0 6 0 0" Foreground="{StaticResource ColorText}" IsChecked="{Binding StatusFilterAll}"/>
+                        <RadioButton x:Name="radiobtn2" Content="Успешно сданные дисциплины" Margin="0 6 0 0" Foreground="{StaticResource ColorText}" IsChecked="{Binding StatusFilterTrue}"/>
+                        <RadioButton x:Name="radiobtn3" Content="Успешно не сданные дисциплины" Margin="0 6 0 0" Foreground="{StaticResource ColorText}" IsChecked="{Binding StatusFilterFalse}"/>
+                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource ButtonStyle}" Margin="3" Content="Сохранить"  Grid.Column="0" Command="{Binding SaveCommand}"/>
+                        <Button Style="{StaticResource ButtonStyle}" Margin="3" Content="Отобразить" Grid.Column="1" Command="{Binding FilterShowCommand}"/>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Style="{StaticResource GroupBoxStyle}" Grid.Row="1" FontFamily="Montserrat" FontSize="14" Header="Добавить дисциплину">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Дисциплина" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Montserrat" FontSize="14" Foreground="{StaticResource ColorText}"/>
+                    <Label Content="Статус" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Montserrat" FontSize="14" Foreground="{StaticResource ColorText}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" MaxHeight="27" 
+                          Text="{Binding NewNameDiscipline}"/>
+                    <ComboBox x:Name="cmbBox" Grid.Row="1" Grid.Column="1" MaxHeight="27" IsSynchronizedWithCurrentItem="True">
+                        <ComboBoxItem>сдал</ComboBoxItem>
+                        <ComboBoxItem>не сдал</ComboBoxItem>
+                    </ComboBox>
+                    <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="3" Height="35" Width="190" VerticalAlignment="Bottom" Margin="0 0 2 5" HorizontalAlignment="Right" Content="Добавить" Command="{Binding AddDisciplineCommand}"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>

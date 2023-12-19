@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ColorViolet" Color="#9496EC"/>
+    <SolidColorBrush x:Key="ColorPink" Color="#ED89D1"/>
+    <SolidColorBrush x:Key="ColorButton" Color="#7701FF"/>
+    <SolidColorBrush x:Key="ColorText" Color="#101828"/>
+    <SolidColorBrush x:Key="ColorPinkMouseOver" Color="#D99CF5"/>
+    <SolidColorBrush x:Key="ColorButtonPressed" Color="#5F00CD"/>
+
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource ColorButton}"/>
+        <Setter Property="Foreground" Value="{StaticResource ColorText}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ColorButtonPressed}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Foreground" Value="{StaticResource ColorText}"/>
+    </Style>
+
+    <Style x:Key="StatusTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ColorText}"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Margin" Value="5"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding StatusDiscipline}" Value="True">
+                <Setter Property="Text" Value="Сдано"/>
+                <Setter Property="Background" Value="LightGreen"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding StatusDiscipline}" Value="False">
+                <Setter Property="Text" Value="Не сдано"/>
+                <Setter Property="Background" Value="LightCoral"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
